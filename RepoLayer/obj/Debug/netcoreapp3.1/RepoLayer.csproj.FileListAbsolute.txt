@@ -1,0 +1,16 @@
+D:\Project\FirstProject\RepoLayer\bin\Debug\netcoreapp3.1\RepoLayer.deps.json
+D:\Project\FirstProject\RepoLayer\bin\Debug\netcoreapp3.1\RepoLayer.runtimeconfig.json
+D:\Project\FirstProject\RepoLayer\bin\Debug\netcoreapp3.1\RepoLayer.runtimeconfig.dev.json
+D:\Project\FirstProject\RepoLayer\bin\Debug\netcoreapp3.1\RepoLayer.dll
+D:\Project\FirstProject\RepoLayer\bin\Debug\netcoreapp3.1\RepoLayer.pdb
+D:\Project\FirstProject\RepoLayer\bin\Debug\netcoreapp3.1\CommonLayer.dll
+D:\Project\FirstProject\RepoLayer\bin\Debug\netcoreapp3.1\CommonLayer.pdb
+D:\Project\FirstProject\RepoLayer\obj\Debug\netcoreapp3.1\RepoLayer.csproj.AssemblyReference.cache
+D:\Project\FirstProject\RepoLayer\obj\Debug\netcoreapp3.1\RepoLayer.GeneratedMSBuildEditorConfig.editorconfig
+D:\Project\FirstProject\RepoLayer\obj\Debug\netcoreapp3.1\RepoLayer.AssemblyInfoInputs.cache
+D:\Project\FirstProject\RepoLayer\obj\Debug\netcoreapp3.1\RepoLayer.AssemblyInfo.cs
+D:\Project\FirstProject\RepoLayer\obj\Debug\netcoreapp3.1\RepoLayer.csproj.CoreCompileInputs.cache
+D:\Project\FirstProject\RepoLayer\obj\Debug\netcoreapp3.1\RepoLayer.csproj.CopyComplete
+D:\Project\FirstProject\RepoLayer\obj\Debug\netcoreapp3.1\RepoLayer.dll
+D:\Project\FirstProject\RepoLayer\obj\Debug\netcoreapp3.1\RepoLayer.pdb
+D:\Project\FirstProject\RepoLayer\obj\Debug\netcoreapp3.1\RepoLayer.genruntimeconfig.cache
