@@ -31,5 +31,23 @@ namespace FundooNoteApplication.Controllers
                 return this.BadRequest(new { success = false, message = "User Registration UnSuccessful", data = result });
             }
         }
+        [HttpPost]
+        [Route("Login")]
+
+        public IActionResult Login(UserLoginModel userLoginModel)
+        {
+            var result = _userBusiness.UserLogin(userLoginModel);
+            if (result != null)
+            {
+                return this.Ok(new { success = true, message = "User Login Successful", data = result });
+            }
+            else
+            {
+                return this.BadRequest(new { success = false, message = "User Login UnSuccessful", data = result });
+
+            }
+        }
+
+
     }
 }

@@ -1,10 +1,14 @@
 ﻿using CommonLayer.Models;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using RepoLayer.Context;
 using RepoLayer.Entity;
 using RepoLayer.Interface;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Security.Claims;
 using System.Text;
 
 namespace RepoLayer.Services
@@ -46,5 +50,32 @@ namespace RepoLayer.Services
                 throw ex;
             }
         }
+
+        public string UserLogin(UserLoginModel model)
+        {
+            try
+            {
+
+                var userEntity = _fundooContext.UsersTable.FirstOrDefault(u => u.Email == model.Email && u.Password == model.Password);
+
+                if (userEntity != null)
+                {
+
+                    // return userEntity.Email;
+                    return "Login Successful";
+                }
+                else
+                {
+                    return "Enter valid credentias";
+                }
+            }
+
+            catch (Exception ex)
+            {
+                throw (ex);
+            }
+        }
+
+       
     }
 }
