@@ -110,7 +110,8 @@ namespace RepoLayer.Services
                 if (emailValidity != null)
                 {
                     var token = GenerateJwtToken(emailValidity.Email, emailValidity.UserID);
-                    
+                    MSMQ msmq = new MSMQ();
+                    msmq.sendData2Queue(token);
                     return token;
                 }
                 return null;
@@ -120,5 +121,7 @@ namespace RepoLayer.Services
                 throw ex;
             }
         }
+
+
     }
 }

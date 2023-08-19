@@ -56,13 +56,14 @@ namespace FundooNoteApplication.Controllers
             var result = _userBusiness.ForgotPassword(forgotPasswordModel);
             if (result != null)
             {
-                return this.Ok(new { success = true, message = "Token sent Successfully", data = result });
+                return this.Ok(new { success = true, message = "Token sent Successfully"});
             }
             else
             {
-                return this.BadRequest(new { success = false, message = "Token sending Failed", data = result });
+                return this.BadRequest(new { success = false, message = "Token sending Failed"});
             }
         }
+
 
     }
 }

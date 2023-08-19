@@ -44,6 +44,10 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "Experimental.System.Messaging": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
             "Microsoft.AspNet.WebApi.Owin": {
               "target": "Package",
               "version": "[5.2.9, )"
@@ -127,6 +131,10 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "Experimental.System.Messaging": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
             "Microsoft.AspNet.WebApi.Owin": {
               "target": "Package",
               "version": "[5.2.9, )"
@@ -215,6 +223,10 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "Experimental.System.Messaging": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
             "Microsoft.AspNet.WebApi.Owin": {
               "target": "Package",
               "version": "[5.2.9, )"
@@ -305,6 +317,10 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "Experimental.System.Messaging": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
             "Microsoft.AspNet.WebApi.Owin": {
               "target": "Package",
               "version": "[5.2.9, )"

@@ -72,3 +72,4 @@ D:\Project\FirstProject\FundooNoteApplication\bin\Debug\netcoreapp3.1\Swashbuckl
 D:\Project\FirstProject\FundooNoteApplication\bin\Debug\netcoreapp3.1\System.IdentityModel.Tokens.Jwt.dll
 D:\Project\FirstProject\FundooNoteApplication\bin\Debug\netcoreapp3.1\System.Text.Encodings.Web.dll
 D:\Project\FirstProject\FundooNoteApplication\bin\Debug\netcoreapp3.1\System.Text.Json.dll
+D:\Project\FirstProject\FundooNoteApplication\bin\Debug\netcoreapp3.1\Experimental.System.Messaging.dll
