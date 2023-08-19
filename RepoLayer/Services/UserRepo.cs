@@ -62,11 +62,12 @@ namespace RepoLayer.Services
                 {
 
                     // return userEntity.Email;
-                    return "Login Successful";
+                    var token = GenerateJwtToken(userEntity.Email, userEntity.UserID);
+                    return token;
                 }
                 else
                 {
-                    return "Enter valid credentias";
+                    return null;
                 }
             }
 
@@ -76,6 +77,31 @@ namespace RepoLayer.Services
             }
         }
 
-       
+        public class UserLoginResult
+        {
+            public UserEntity UserEntity { get; set; }
+            public string JwtToken { get; set; }
+        }
+        public string GenerateJwtToken(string Email, long UserId)
+        {
+
+            var claims = new List<Claim>
+                {
+                    new Claim("UserId", UserId.ToString()),
+                    new Claim("Email", Email)
+                };
+            // You can add more claims as needed, such as roles or custom claims.
+
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSettings:SecretKey"]));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            JwtSecurityToken jwtSecurityToken = new JwtSecurityToken(configuration["JwtSettings:Issuer"], configuration["JwtSettings:Audience"], claims, DateTime.Now, DateTime.Now.AddHours(1), creds);
+
+
+            return new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
+
+        }
+
+
     }
 }
