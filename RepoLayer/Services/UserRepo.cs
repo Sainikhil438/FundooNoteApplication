@@ -122,6 +122,27 @@ namespace RepoLayer.Services
             }
         }
 
-
+        public bool ResetPassword(string Email, string NewPassword, string ConfirmPassword)
+        {
+            try
+            {
+                if (NewPassword == ConfirmPassword)
+                {
+                    var emailValid = _fundooContext.UsersTable.FirstOrDefault(u => u.Email == Email);
+                    if (emailValid != null)
+                    {
+                        emailValid.Password = ConfirmPassword;
+                        _fundooContext.UsersTable.Update(emailValid);
+                        _fundooContext.SaveChanges();
+                        return true;
+                    }
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

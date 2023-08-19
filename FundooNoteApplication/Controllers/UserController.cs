@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Interface;
 using CommonLayer.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -64,6 +65,25 @@ namespace FundooNoteApplication.Controllers
             }
         }
 
-
+        [Authorize]
+        [HttpPut]
+        [Route("ResetPassword")]
+        public IActionResult ResetPassword1(string newPassword, string confirmPassword)
+        {
+            var email = User.FindFirst(x => x.Type == "Email").Value;
+            if (email != null)
+            {
+                var result = _userBusiness.ResetPassword(email, newPassword, confirmPassword);
+                if (result == true)
+                {
+                    return Ok(new { success = true, message = "Reset Password Successfully" });
+                }
+                else
+                {
+                    return Unauthorized(new { success = false, message = "Invalid Credentials Reset Password Unsuccessful" });
+                }
+            }
+            return null;
+        }
     }
 }
