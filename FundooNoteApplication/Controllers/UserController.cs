@@ -48,6 +48,21 @@ namespace FundooNoteApplication.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("ForgotPassword")]
+
+        public IActionResult ForgotPassword(ForgotPasswordModel forgotPasswordModel)
+        {
+            var result = _userBusiness.ForgotPassword(forgotPasswordModel);
+            if (result != null)
+            {
+                return this.Ok(new { success = true, message = "Token sent Successfully", data = result });
+            }
+            else
+            {
+                return this.BadRequest(new { success = false, message = "Token sending Failed", data = result });
+            }
+        }
 
     }
 }

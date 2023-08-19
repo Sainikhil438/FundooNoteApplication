@@ -102,6 +102,23 @@ namespace RepoLayer.Services
 
         }
 
-
+        public string ForgotPassword(ForgotPasswordModel forgotPasswordModel)
+        {
+            try
+            {
+                var emailValidity = _fundooContext.UsersTable.FirstOrDefault(u => u.Email == forgotPasswordModel.Email);
+                if (emailValidity != null)
+                {
+                    var token = GenerateJwtToken(emailValidity.Email, emailValidity.UserID);
+                    
+                    return token;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
