@@ -88,5 +88,79 @@ namespace FundooNoteApplication.Controllers
                 return this.BadRequest(new { success = false, message = "User not found", data = result });
             }
         }
+
+        [Authorize]
+        [HttpPatch]
+        [Route("Colour")]
+        public IActionResult UpdateColour(long Noteid, string colour)
+        {
+            var userClaim = User.Claims.FirstOrDefault(claims => claims.Type == "UserId").Value;
+            int userId = int.Parse(userClaim);
+            var result = _noteBusiness.UpdateColour(Noteid, colour, userId);
+            if (result != null)
+            {
+                return this.Ok(new { success = true, message = "Colour Updated Successfully with " + result + " colour" });
+            }
+            else
+            {
+                return this.BadRequest(new { success = false, message = "Colour Update Failed" });
+            }
+        }
+
+        [Authorize]
+        [HttpPut]
+        [Route("Archive")]
+        public IActionResult IsArchiveData(long Noteid)
+        {
+            var userIdClaim = User.Claims.FirstOrDefault(claim => claim.Type == "UserId").Value;
+            int userId = int.Parse(userIdClaim);
+            var result = _noteBusiness.ArchiveByNoteId(Noteid, userId);
+            if (result == true)
+            {
+                return this.Ok(new { success = true, message = "Note Archived Successfully", data = result });
+            }
+            else
+            {
+                return this.BadRequest(new { success = false, message = "Note Archive Unsuccessful", data = result });
+            }
+        }
+
+        [Authorize]
+        [HttpPut]
+        [Route("Pin")]
+        public IActionResult IsPinData(long Noteid)
+        {
+            var userClaim = User.Claims.FirstOrDefault(claim => claim.Type == "UserId").Value;
+            int userId = int.Parse(userClaim);
+            var result = _noteBusiness.PinByNoteId(Noteid, userId);
+            if (result == true)
+            {
+                return this.Ok(new { success = true, message = "Pin Updated Successfully", data = result });
+            }
+            else
+            {
+                return this.BadRequest(new { success = false, message = "Pin Update Unsuccessful", data = result });
+            }
+        }
+
+        [Authorize]
+        [HttpPut]
+        [Route("Trash")]
+        public IActionResult IsTrashData(long Noteid)
+        {
+            var userClaim = User.Claims.FirstOrDefault(claims => claims.Type == "UserId").Value;
+            int userId = int.Parse(userClaim);
+            var result = _noteBusiness.TrashByNoteId(Noteid, userId);
+            if (result == true)
+            {
+                return this.Ok(new { success = true, message = "Trash Updated Successfully", data = result });
+            }
+            else
+            {
+                return this.BadRequest(new { success = false, message = "Trash Update Unsuccessful", data = result });
+            }
+        }
+
+        
     }
 }

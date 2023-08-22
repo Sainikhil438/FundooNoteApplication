@@ -61,5 +61,55 @@ namespace BusinessLayer.Services
                 throw ex;
             }
         }
+
+        public string UpdateColour(long Noteid, string colour, long Userid)
+        {
+            try
+            {
+                return NoteRepo.UpdateColour(Noteid, colour, Userid);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public bool ArchiveByNoteId(long Noteid, long Userid)
+        {
+            try
+            {
+                return NoteRepo.ArchiveByNoteId(Noteid, Userid);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public bool PinByNoteId(long Noteid, long Userid)
+        {
+            try
+            {
+                return NoteRepo.PinByNoteId(Noteid, Userid);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public bool TrashByNoteId(long Noteid, long Userid)
+        {
+            try
+            {
+                return NoteRepo.TrashByNoteId(Noteid, Userid);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        
     }
 }

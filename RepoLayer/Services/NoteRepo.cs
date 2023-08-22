@@ -88,5 +88,101 @@ namespace RepoLayer.Services
         {
             return _fundooContext.NotesTable.Where(user => user.UserID == UserId).ToList();
         }
+
+        public string UpdateColour(long Noteid, string colour, long Userid)
+        {
+            try
+            {
+                var existingNote = _fundooContext.NotesTable.FirstOrDefault(x => x.NoteID == Noteid && x.UserID == Userid);
+                if (existingNote != null)
+                {
+                    existingNote.Colour = colour;
+                    _fundooContext.NotesTable.Update(existingNote);
+                    _fundooContext.SaveChanges();
+                    return existingNote.Colour;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public bool ArchiveByNoteId(long Noteid, long Userid)
+        {
+            try
+            {
+                var result = _fundooContext.NotesTable.FirstOrDefault(x => x.NoteID == Noteid && x.UserID == Userid);
+
+                if (result != null)
+                {
+                    result.IsArchive = true;
+                    _fundooContext.NotesTable.Update(result);
+                    _fundooContext.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public bool PinByNoteId(long Noteid, long Userid)
+        {
+            try
+            {
+                var result = _fundooContext.NotesTable.FirstOrDefault(x => x.NoteID == Noteid && x.UserID == Userid);
+
+                if (result != null)
+                {
+                    result.IsPin = true;
+                    _fundooContext.NotesTable.Update(result);
+                    _fundooContext.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public bool TrashByNoteId(long Noteid, long Userid)
+        {
+            try
+            {
+                var existingNote = _fundooContext.NotesTable.FirstOrDefault(x => x.NoteID == Noteid && x.UserID == Userid);
+                if (existingNote != null)
+                {
+                    existingNote.IsTrash = true;
+                    _fundooContext.NotesTable.Update(existingNote);
+                    _fundooContext.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        
     }
 }
