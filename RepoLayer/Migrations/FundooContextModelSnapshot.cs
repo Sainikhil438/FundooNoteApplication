@@ -19,6 +19,50 @@ namespace RepoLayer.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("RepoLayer.Entity.NoteEntity", b =>
+                {
+                    b.Property<long>("NoteID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Colour")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsArchive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsPin")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsTrash")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("Remainder")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("TakeNote")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("UserID")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("UsersTableUserID")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("NoteID");
+
+                    b.HasIndex("UsersTableUserID");
+
+                    b.ToTable("NotesTable");
+                });
+
             modelBuilder.Entity("RepoLayer.Entity.UserEntity", b =>
                 {
                     b.Property<long>("UserID")
@@ -44,6 +88,13 @@ namespace RepoLayer.Migrations
                     b.HasKey("UserID");
 
                     b.ToTable("UsersTable");
+                });
+
+            modelBuilder.Entity("RepoLayer.Entity.NoteEntity", b =>
+                {
+                    b.HasOne("RepoLayer.Entity.UserEntity", "UsersTable")
+                        .WithMany()
+                        .HasForeignKey("UsersTableUserID");
                 });
 #pragma warning restore 612, 618
         }

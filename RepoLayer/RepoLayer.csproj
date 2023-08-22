@@ -5,11 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CommonLayer\CommonLayer.csproj" />
+    <Compile Remove="Migrations\20230819182451_NotesMigration.cs" />
+    <Compile Remove="Migrations\20230819182451_NotesMigration.Designer.cs" />
+    <Compile Remove="Migrations\20230819182518_NotesMigration.cs" />
+    <Compile Remove="Migrations\20230819182518_NotesMigration.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Entity\" />
+    <ProjectReference Include="..\CommonLayer\CommonLayer.csproj" />
   </ItemGroup>
 
   <ItemGroup>
