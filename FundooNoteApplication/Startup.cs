@@ -1,5 +1,6 @@
 using BusinessLayer.Interface;
 using BusinessLayer.Services;
+using CloudinaryDotNet;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -18,6 +19,7 @@ using RepoLayer.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -41,6 +43,22 @@ namespace FundooNoteApplication
             services.AddTransient<IUserRepo, UserRepo>();
             services.AddTransient<INoteBusiness, NoteBusiness>();
             services.AddTransient<INoteRepo, NoteRepo>();
+            services.AddTransient<FileService, FileService>();
+
+            IConfigurationSection configurationSection = Configuration.GetSection("CloudinarySettings");
+            Account account = new Account(
+                configurationSection["my_cloud_name"],
+                configurationSection["my_api_key"],
+                configurationSection["my_api_secret"]
+                );
+
+            Cloudinary cloudinary = new Cloudinary(account);
+            services.AddSingleton(cloudinary);
+
+
+
+
+            services.AddControllers();
 
             services.AddSwaggerGen(c =>
             {

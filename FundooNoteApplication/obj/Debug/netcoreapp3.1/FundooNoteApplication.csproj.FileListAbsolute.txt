@@ -73,3 +73,4 @@ D:\Project\FirstProject\FundooNoteApplication\bin\Debug\netcoreapp3.1\System.Ide
 D:\Project\FirstProject\FundooNoteApplication\bin\Debug\netcoreapp3.1\System.Text.Encodings.Web.dll
 D:\Project\FirstProject\FundooNoteApplication\bin\Debug\netcoreapp3.1\System.Text.Json.dll
 D:\Project\FirstProject\FundooNoteApplication\bin\Debug\netcoreapp3.1\Experimental.System.Messaging.dll
+D:\Project\FirstProject\FundooNoteApplication\bin\Debug\netcoreapp3.1\CloudinaryDotNet.dll

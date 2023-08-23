@@ -6,6 +6,10 @@ using RepoLayer.Context;
 using System.Linq;
 using System;
 using Microsoft.AspNetCore.Authorization;
+using System.Threading.Tasks;
+using CloudinaryDotNet.Actions;
+using CloudinaryDotNet;
+using System.Collections.Generic;
 
 namespace FundooNoteApplication.Controllers
 {
@@ -14,11 +18,13 @@ namespace FundooNoteApplication.Controllers
     public class NoteController : ControllerBase
     {
         private readonly INoteBusiness _noteBusiness;
+        private readonly Cloudinary _cloudinary;
         private readonly FundooContext _fundooContext;
 
-        public NoteController(INoteBusiness noteBusiness, FundooContext fundooContext)
+        public NoteController(INoteBusiness noteBusiness, Cloudinary cloudinary, FundooContext fundooContext)
         {
             _noteBusiness = noteBusiness;
+            _cloudinary = cloudinary;
             _fundooContext = fundooContext;
         }
 
@@ -161,6 +167,24 @@ namespace FundooNoteApplication.Controllers
             }
         }
 
-        
+        [Authorize]
+        [HttpPatch]
+        [Route("UploadImage")]
+        public async Task<IActionResult> UploadImage(long Noteid, IFormFile image)
+        {
+            var userClaim = User.Claims.FirstOrDefault(claims => claims.Type == "UserId").Value;
+            int userId = int.Parse(userClaim);
+            var result = await _noteBusiness.UploadImageById(Noteid, userId, image);
+            if (result.Item1 == 1)
+            {
+                return this.Ok(new { success = true, message = "Image uploaded Successfully", data = result });
+            }
+            else
+            {
+                return this.BadRequest(new { success = false, message = "Image upload Unsuccessful", data = result });
+            }
+        }
+
+
     }
 }
