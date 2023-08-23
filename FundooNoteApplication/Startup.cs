@@ -1,6 +1,9 @@
 using BusinessLayer.Interface;
 using BusinessLayer.Services;
 using CloudinaryDotNet;
+using CommonLayer.Models;
+using FundooNoteSubscriber.Services;
+using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -13,6 +16,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using RabbitMQ.Client;
 using RepoLayer.Context;
 using RepoLayer.Interface;
 using RepoLayer.Services;
@@ -45,6 +49,13 @@ namespace FundooNoteApplication
             services.AddTransient<INoteRepo, NoteRepo>();
             services.AddTransient<FileService, FileService>();
 
+            services.AddSingleton<RabbitMQPublisher>(_ => new RabbitMQPublisher(new ConnectionFactory
+            {
+                HostName = Configuration["RabbitMQSettings:HostName"],
+                UserName = Configuration["RabbitMQSettings:UserName"],
+                Password = Configuration["RabbitMQSettings:Password"]
+            }));
+
             IConfigurationSection configurationSection = Configuration.GetSection("CloudinarySettings");
             Account account = new Account(
                 configurationSection["my_cloud_name"],
@@ -57,7 +68,7 @@ namespace FundooNoteApplication
 
 
 
-
+            //services.AddMassTransitHostedService();
             services.AddControllers();
 
             services.AddSwaggerGen(c =>
