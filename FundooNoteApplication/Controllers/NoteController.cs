@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 using CloudinaryDotNet.Actions;
 using CloudinaryDotNet;
 using System.Collections.Generic;
+using Microsoft.Extensions.Caching.Distributed;
+using Newtonsoft.Json;
+using RepoLayer.Entity;
 
 namespace FundooNoteApplication.Controllers
 {
@@ -20,12 +23,14 @@ namespace FundooNoteApplication.Controllers
         private readonly INoteBusiness _noteBusiness;
         private readonly Cloudinary _cloudinary;
         private readonly FundooContext _fundooContext;
+        private readonly IDistributedCache _distributedCache;
 
-        public NoteController(INoteBusiness noteBusiness, Cloudinary cloudinary, FundooContext fundooContext)
+        public NoteController(INoteBusiness noteBusiness, Cloudinary cloudinary, FundooContext fundooContext, IDistributedCache distributedCache)
         {
             _noteBusiness = noteBusiness;
             _cloudinary = cloudinary;
             _fundooContext = fundooContext;
+            _distributedCache = distributedCache;
         }
 
         [Authorize]
@@ -93,6 +98,51 @@ namespace FundooNoteApplication.Controllers
             {
                 return this.BadRequest(new { success = false, message = "User not found", data = result });
             }
+        }
+
+        [Authorize]
+        [HttpGet("GetAllNoteByRedis")]
+        public async Task<IActionResult> GetAllNotesByIdRedis()
+        {
+            var userIdClaim = User.Claims.FirstOrDefault(claim => claim.Type == "UserId").Value;
+            int userId = int.Parse(userIdClaim);
+            if (userIdClaim != null)
+            {
+                // Check if data is cached
+                var cachedData = await _distributedCache.GetStringAsync($"Notes{userId}");
+                if (!string.IsNullOrEmpty(cachedData))
+                {
+                    var notes = JsonConvert.DeserializeObject<List<NoteEntity>>(cachedData);
+                    return Ok(new { success = true, message = "Get All Notes Successfully by Redis from cache", data = notes });
+                }
+                else
+                {
+                    var notesFromDb = _fundooContext.NotesTable.Where(note => note.UserID == userId).ToList();
+
+                    // Cache the data for 1 hour
+                    var cacheOptions = new DistributedCacheEntryOptions
+                    {
+                        AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(1)
+                    };
+                    await _distributedCache.SetStringAsync($"Notes{userId}", JsonConvert.SerializeObject(notesFromDb), cacheOptions);
+
+                    //return Ok(notesFromDb);
+                    if (notesFromDb != null)
+                    {
+                        return Ok(new { success = true, message = "Get All Notes Successfully by Redis from database", data = notesFromDb });
+                    }
+                    else
+                    {
+                        return BadRequest(new { success = false, message = "Notes Not Found", data = notesFromDb });
+                    }
+                }
+            }
+            else
+            {
+                return Ok(null);
+            }
+
+
         }
 
         [Authorize]
