@@ -1,0 +1,13 @@
+D:\Project\FirstProject\CommonLayer\bin\Release\netcoreapp3.1\CommonLayer.deps.json
+D:\Project\FirstProject\CommonLayer\bin\Release\netcoreapp3.1\CommonLayer.runtimeconfig.json
+D:\Project\FirstProject\CommonLayer\bin\Release\netcoreapp3.1\CommonLayer.runtimeconfig.dev.json
+D:\Project\FirstProject\CommonLayer\bin\Release\netcoreapp3.1\CommonLayer.dll
+D:\Project\FirstProject\CommonLayer\bin\Release\netcoreapp3.1\CommonLayer.pdb
+D:\Project\FirstProject\CommonLayer\obj\Release\netcoreapp3.1\CommonLayer.csproj.AssemblyReference.cache
+D:\Project\FirstProject\CommonLayer\obj\Release\netcoreapp3.1\CommonLayer.GeneratedMSBuildEditorConfig.editorconfig
+D:\Project\FirstProject\CommonLayer\obj\Release\netcoreapp3.1\CommonLayer.AssemblyInfoInputs.cache
+D:\Project\FirstProject\CommonLayer\obj\Release\netcoreapp3.1\CommonLayer.AssemblyInfo.cs
+D:\Project\FirstProject\CommonLayer\obj\Release\netcoreapp3.1\CommonLayer.csproj.CoreCompileInputs.cache
+D:\Project\FirstProject\CommonLayer\obj\Release\netcoreapp3.1\CommonLayer.dll
+D:\Project\FirstProject\CommonLayer\obj\Release\netcoreapp3.1\CommonLayer.pdb
+D:\Project\FirstProject\CommonLayer\obj\Release\netcoreapp3.1\CommonLayer.genruntimeconfig.cache
