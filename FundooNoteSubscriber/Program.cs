@@ -8,12 +8,12 @@ using System.Runtime.CompilerServices;
 
 namespace FundooNoteSubscriber
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
             var configuration = new ConfigurationBuilder()
-                .AddJsonFile("D:\\Project\\FirstProject\\FundooNoteSubscriber\\appsettings.json", optional: false)
+                .AddJsonFile(@"D:\Project\FirstProject\FundooNoteSubscriber\appsettings.json", optional: false)
                 .Build();
 
             var factory = new ConnectionFactory
@@ -25,7 +25,7 @@ namespace FundooNoteSubscriber
 
             var busControl = Bus.Factory.CreateUsingRabbitMq(cfg =>
             {
-                cfg.Host(new Uri(configuration["RabbitMQSettings:HostName"]), h =>
+                cfg.Host(new Uri(configuration["RabbitMQSettings:HostUri"]), h =>
                 {
                     h.Username(configuration["RabbitMQSettings:UserName"]);
                     h.Password(configuration["RabbitMQSttings:Password"]);
